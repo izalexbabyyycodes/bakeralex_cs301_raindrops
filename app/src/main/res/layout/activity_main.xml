@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <!--the surfaceView that the view class draws on-->
+    <edu.up.bakeralex_cs301_raindrops.View
+        android:id="@+id/SurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+
+
+    <!--contains the labels for the seekbars-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/leftLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="start"
+                android:text="Left"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/rightLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="end"
+                android:text="Right"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/upLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="start"
+                android:text="Up"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/downLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="end"
+                android:text="Down"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+
+
+        <!--contains the seekbars to control the
+        vertical and horizontal direction of the ball-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <SeekBar
+                android:id="@+id/horizontalSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4" />
+
+            <SeekBar
+                android:id="@+id/verticalSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
