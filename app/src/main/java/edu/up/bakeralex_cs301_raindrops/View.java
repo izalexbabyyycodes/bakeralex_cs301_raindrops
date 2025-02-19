@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
 import androidx.annotation.NonNull;
 import java.util.Random;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  * date: February 11, 2024
  * version: 1
  */
-public class View extends SurfaceView{
+public class View extends SurfaceView implements SurfaceHolder.Callback {
 
 
     /*initializes variables*/
@@ -30,6 +32,10 @@ public class View extends SurfaceView{
     Paint blue = new Paint();
     Paint pink = new Paint();
     Random rng = new Random();
+    //added a different color for the players circle
+    Paint playerBlue = new Paint();
+    float playerX;
+    float playerY;
 
 
     /*constructor for the view object
@@ -37,6 +43,7 @@ public class View extends SurfaceView{
     public View(Context context, AttributeSet attrs){
         super(context, attrs);
         setWillNotDraw(false);
+        getHolder().addCallback(this);
 
         /*Paint colors init*/
         red.setColor(0xFFFF0000);
@@ -54,12 +61,16 @@ public class View extends SurfaceView{
         pink.setColor(0xFFD261D4);
         pink.setStyle(Paint.Style.FILL);
         paints.add(pink);
+        //initializing the color for the player
+        playerBlue.setColor(0xFF6EF3F5);
+        playerBlue.setStyle(Paint.Style.FILL);
     }
 
 
     /*Randomized number as well as color of the circles*/
     public int rngNumCircles(){
-        return rng.nextInt(7) + 6;
+        //changed the bounds to account for a player circle always being implemented
+        return rng.nextInt(6) + 6;
     }
     public Paint rngColor(){
         return paints.get(rng.nextInt(5));
@@ -81,6 +92,19 @@ public class View extends SurfaceView{
         float tempY = rngY();
         paper.drawOval(tempX-30.0f, tempY-30.0f, tempX + 30.0f, tempY + 30.0f, rngColor());
     }
+    public void PlayerCircle(Canvas paper){
+        //used a lot of context actions as suggested by android studio
+        playerX = rngX();
+        playerY = rngY();
+        paper.drawOval(playerX-30.0f, playerY-30.0f, playerX + 30.0f, playerY + 30.0f, playerBlue);
+    }
+
+
+    public void setCirclePositions(int x, int y){
+        this.playerX = x;
+        this.playerY = y;
+        invalidate();
+    }
 
 
     /*draws on the surfaceView*/
@@ -91,6 +115,23 @@ public class View extends SurfaceView{
         for (int i = 0; i < rngNumCircles(); i++){
             Circles(paper);
         }
+
+        //draws the circle for the user to control
+        //updated for the SurfaceView with inputs for the seekBar
+        PlayerCircle(paper);
+    }
+
+
+    @Override
+    public void surfaceCreated(@NonNull SurfaceHolder holder) {
+        PlayerCircle(paper);
+    }
+
+    @Override
+    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+    }
+    @Override
+    public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
     }
 
 }

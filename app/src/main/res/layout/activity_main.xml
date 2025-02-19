@@ -82,16 +82,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!--changed the bounds for the progress on the
+            seekbars to be from 0-800-->
             <SeekBar
                 android:id="@+id/horizontalSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:max="800"
                 android:layout_weight="4" />
 
+            <!--changed the bounds for the progress on the
+            seekbars to be from 0-800-->
             <SeekBar
                 android:id="@+id/verticalSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:max="800"
                 android:layout_weight="4" />
 
         </LinearLayout>
